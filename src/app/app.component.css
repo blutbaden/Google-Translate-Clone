@@ -1,0 +1,9 @@
+#site-title {
+  text-decoration: none;
+}
+
+#site-title > span {
+  color: #5f6368;
+  font-weight: 600;
+  opacity: 1;
+}
