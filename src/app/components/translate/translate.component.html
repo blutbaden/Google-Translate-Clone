@@ -3,7 +3,7 @@
     <div class="card-header border-bottom border-1">
       <div class="d-flex">
         <div class="d-flex flex-row flex-even align-items-center">
-          <button [disabled]="isError" (click)="sourceLanguage = {code: 'auto', name: 'auto'}" class="btn bg-transparent text">Detect Language</button>
+          <button [disabled]="isError || true" (click)="sourceLanguage = {code: 'auto', name: 'auto'}" class="btn bg-transparent text">Detect Language</button>
           <button [disabled]="isError" (click)="getLanguages(true)" class="btn border border-1">
             <ng-container *ngIf="sourceLanguage; else setDefaultSelectBtn">
               {{sourceLanguage.name}}
@@ -24,13 +24,25 @@
     </div>
     <div class="card-body">
       <div [ngClass]="isSelectLanguageBtnClicked ? 'd-none' : ''" class="d-flex">
-        <div class="flex-fill border-end border-1 w-100 p-1">
-          <textarea [disabled]="isError" #textToTranslateInput class="w-100"></textarea>
+        <div class="flex-fill w-100 p-1">
+          <textarea rows="5" placeholder="Enter text" [disabled]="isError" #textToTranslateInput style="outline: none;" class="w-100 border-0 bg-transparent h5"></textarea>
         </div>
-        <div class="flex-fill w-100">
-          <p class="p-1">
-            {{translatedText}}
-          </p>
+        <div class="position-relative flex-fill w-100 rounded" style="background-color: #f8f9fa">
+            <ng-container *ngIf="translatedText; else defaultHover">
+              <div class="p-3">
+                <span class="h5">{{translatedText}}</span>
+              </div>
+              <a [copy-clipboard]="translatedText" (copied)="notify($event)" role="button" class="position-absolute w-100 pull-right text-end top-0 pull-right">
+                <svg xmlns="http://www.w3.org/2000/svg" class="copy-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                </svg>
+              </a>
+            </ng-container>
+            <ng-template #defaultHover>
+              <div class="p-3">
+                <span class="h5 text-secondary">Translation</span>
+              </div>
+            </ng-template>
         </div>
       </div>
       <ng-container *ngIf="isSelectLanguageBtnClicked">
@@ -47,8 +59,11 @@
     </div>
   </div>
   <ng-container *ngIf="isError">
-    <div class="position-absolute d-flex w-100 justify-content-center">
-      <span class="error-text text">An error has occurred ! Please retry later.</span>
+    <div class="position-absolute d-flex w-100 align-items-center flex-column">
+      <span class="error-text text mb-2">{{errorMessage}}</span>
+      <div>
+        <button (click)="reload()" class="btn btn-outline-danger text-center">Reload</button>
+      </div>
     </div>
   </ng-container>
 </div>

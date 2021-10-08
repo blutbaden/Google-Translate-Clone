@@ -8,12 +8,15 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { SearchLanguagePipe } from './shared/pipes/search-language.pipe';
+import {CopyClipboardDirective} from "./shared/directives/CopyClipboardDirective";
+import {NotifierModule} from "angular-notifier";
 
 @NgModule({
   declarations: [
     AppComponent,
     TranslateComponent,
-    SearchLanguagePipe
+    SearchLanguagePipe,
+    CopyClipboardDirective
   ],
   imports: [
     BrowserModule,
@@ -21,9 +24,20 @@ import { SearchLanguagePipe } from './shared/pipes/search-language.pipe';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    NotifierModule.withConfig({
+      position: {
+        horizontal: {
+          position: 'right',
+        },
+      },
+      behaviour: {
+        autoHide: 1000,
+      },
+    })
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [CopyClipboardDirective],
 })
 export class AppModule { }
