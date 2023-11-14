@@ -22,3 +22,7 @@ Run `docker run -d -p 8080:80 angular-app` to create and start a new Docker cont
 ## Further help
 
 This project use Google Translate Api to translate sentences. In order to get the API_KEY visit this [link](https://rapidapi.com/googlecloud/api/google-translate1/).
+
+## Helpful links
+
+[Deploy an Angular App to Vercel](https://www.dotenv.org/docs/frameworks/angular/vercel).
