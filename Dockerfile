@@ -3,10 +3,16 @@
 # ----------------------------
 FROM node:18 AS build
 
+# Get the arguments from the command line
+ARG NG_APP_GOOGLE_TRANSLATE_API_KEY
+
+# Set the environment variables
+ENV NG_APP_GOOGLE_TRANSLATE_API_KEY=$NG_APP_GOOGLE_TRANSLATE_API_KEY
+
 WORKDIR /app
 
 COPY package*.json .
-RUN npm install
+RUN npm install --force
 
 COPY . .
 RUN npm run build

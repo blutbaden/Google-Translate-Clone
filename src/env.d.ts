@@ -22,12 +22,11 @@ interface ImportMetaEnv {
  * @deprecated process.env usage
  * prefer using import.meta.env
  * */
-declare var process: {
-  env: {
-    NG_APP_ENV: string;
-    [key: string]: any;
-  };
-};
+declare namespace NodeJS {
+  export interface ProcessEnv {
+    readonly NG_APP_ENV: string;
+  }
+}
 
 // If your project references @types/node directly (in you) or indirectly (as in RxJS < 7.6.0),
 // you might need to use the following declaration merging.

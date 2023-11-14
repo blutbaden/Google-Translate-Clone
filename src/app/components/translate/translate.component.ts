@@ -64,7 +64,7 @@ export class TranslateComponent implements OnInit, AfterViewInit {
   getTranslation(textToTranslate: string) {
     if(this.checkBeforeTranslate(textToTranslate)){
       this.isLoading = true;
-      return this.translateService.translate(this.sourceLanguage?.code, this.destinationLanguage?.code, textToTranslate)
+      return this.translateService.translate(this.sourceLanguage?.code || "", this.destinationLanguage?.code || "", textToTranslate)
         .pipe(
           map(res => {
             const {translations} = res.data;

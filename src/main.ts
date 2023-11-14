@@ -3,7 +3,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 
-if (process.env["NG_APP_PRODUCTION"] === "true") {
+if (process.env.NG_APP_ENV === "production") {
   enableProdMode();
 }
 
