@@ -1,6 +1,6 @@
 {
-  "name": "translator",
-  "version": "0.0.0",
+  "name": "google-traduction-clone",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
