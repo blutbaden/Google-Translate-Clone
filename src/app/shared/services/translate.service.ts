@@ -15,8 +15,8 @@ export class TranslateService {
       headers: new HttpHeaders({
         "content-type": "application/x-www-form-urlencoded",
         "accept-encoding": "application/gzip",
-        "x-rapidapi-key": "0b63256737mshd4164fe1489a7dfp1f71c1jsn591d2b3eadd2",
-        "x-rapidapi-host": "google-translate1.p.rapidapi.com"
+        "x-rapidapi-key": environment.GOOGLE_TRANSLATE_API_KEY,
+        "x-rapidapi-host": environment.GOOGLE_TRANSLATE_API_HOST
       })
     };
     let body = new URLSearchParams({
@@ -24,6 +24,6 @@ export class TranslateService {
       "target": destination,
       "q": text,
     });
-    return this.http.post("https://google-translate1.p.rapidapi.com/language/translate/v2", body.toString(), options);
+    return this.http.post(`https://${environment.GOOGLE_TRANSLATE_API_HOST}/language/translate/v2`, body.toString(), options);
   }
 }

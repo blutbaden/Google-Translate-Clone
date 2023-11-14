@@ -1,6 +1,7 @@
-// Tou can get the API_KEY from https://english.api.rakuten.net/googlecloud/api/google-translate1
+// Tou can get the API_KEY from https://rapidapi.com/googlecloud/api/google-translate1/
 
 export const environment = {
   production: false,
-  GoogleTranslationAPIKey: "YOUR_API_KEY"
+  GOOGLE_TRANSLATE_API_HOST: "google-translate1.p.rapidapi.com",
+  GOOGLE_TRANSLATE_API_KEY: "YOUR_API_KEY"
 };
