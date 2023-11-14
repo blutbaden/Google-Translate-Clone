@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +14,8 @@ export class TranslateService {
       headers: new HttpHeaders({
         "content-type": "application/x-www-form-urlencoded",
         "accept-encoding": "application/gzip",
-        "x-rapidapi-key": environment.GOOGLE_TRANSLATE_API_KEY,
-        "x-rapidapi-host": environment.GOOGLE_TRANSLATE_API_HOST
+        "x-rapidapi-key": process.env["NG_APP_GOOGLE_TRANSLATE_API_KEY"] || '',
+        "x-rapidapi-host": process.env["NG_APP_GOOGLE_TRANSLATE_API_HOST"] || ''
       })
     };
     let body = new URLSearchParams({
@@ -24,6 +23,6 @@ export class TranslateService {
       "target": destination,
       "q": text,
     });
-    return this.http.post(`https://${environment.GOOGLE_TRANSLATE_API_HOST}/language/translate/v2`, body.toString(), options);
+    return this.http.post(`https://${process.env["NG_APP_GOOGLE_TRANSLATE_API_HOST"] || ''}/language/translate/v2`, body.toString(), options);
   }
 }
