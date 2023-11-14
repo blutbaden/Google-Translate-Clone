@@ -3,7 +3,7 @@
     <div class="card-header border-bottom border-1">
       <div class="d-flex">
         <div class="d-flex flex-row flex-even align-items-center">
-          <button [disabled]="isError || true" (click)="sourceLanguage = {code: 'auto', name: 'auto'}" class="btn bg-transparent text">Detect Language</button>
+          <!--<button [disabled]="isError || true" (click)="sourceLanguage = {code: 'auto', name: 'auto'}" class="btn bg-transparent text">Detect Language</button>-->
           <button [disabled]="isError" (click)="getLanguages(true)" class="btn border border-1">
             <ng-container *ngIf="sourceLanguage; else setDefaultSelectBtn">
               {{sourceLanguage.name}}
@@ -11,7 +11,7 @@
           </button>
         </div>
         <div class="d-flex flex-even justify-content-center align-items-center">
-          <span class="text">To</span>
+          <span class="text-sm">To</span>
         </div>
         <div class="d-flex flex-row flex-even justify-content-end align-items-center">
           <button [disabled]="isError" (click)="getLanguages(false)" class="btn border border-1">
@@ -25,14 +25,14 @@
     <div class="card-body">
       <div [ngClass]="isSelectLanguageBtnClicked ? 'd-none' : ''" class="d-flex">
         <div class="flex-fill w-100 p-1">
-          <textarea rows="5" placeholder="Enter text" [disabled]="isError" #textToTranslateInput style="outline: none;" class="w-100 border-0 bg-transparent h5"></textarea>
+          <textarea rows="15" placeholder="Enter your text" [disabled]="isError || sourceLanguage === undefined" #textToTranslateInput style="outline: none;" class="w-100 border-0 h5 p-3 bg-white text-md"></textarea>
         </div>
-        <div class="position-relative flex-fill w-100 rounded" style="background-color: #f8f9fa">
+        <div class="position-relative flex-fill w-100 rounded bg-light">
             <ng-container *ngIf="translatedText; else defaultHover">
               <div class="p-3">
                 <span class="h5">{{translatedText}}</span>
               </div>
-              <a [copy-clipboard]="translatedText" (copied)="notify($event)" role="button" class="position-absolute w-100 pull-right text-end top-0 pull-right">
+              <a [copy-clipboard]="translatedText" (copied)="notify($event)" role="button" class="p-2 position-absolute w-100 pull-right text-end top-0 pull-right">
                 <svg xmlns="http://www.w3.org/2000/svg" class="copy-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                 </svg>
@@ -40,18 +40,18 @@
             </ng-container>
             <ng-template #defaultHover>
               <div class="p-3">
-                <span class="h5 text-secondary">Translation</span>
+                <span class="h5 text-secondary text-md">Traduction</span>
               </div>
             </ng-template>
         </div>
       </div>
       <ng-container *ngIf="isSelectLanguageBtnClicked">
         <input [disabled]="isError" class="w-100 form-control mb-3" placeholder="Search language..." [(ngModel)]="languageToSearch">
-        <div class="language-list" style="height: auto;">
+        <div class="language-list" style="height: 300px; overflow: auto">
           <ng-container *ngFor="let languageCode of languagesCodes | searchLanguage: languageToSearch">
-            <button [disabled]="isError" [ngClass]="isSelectedLanguage(languageCode.code) ? 'selected-language' : 'language-btn'" class="btn default-btn d-inline-flex align-items-center w-100 m-1 text" (click)="selectLanguage(languageCode)">
+            <button [disabled]="isError" [ngClass]="isSelectedLanguage(languageCode.code) ? 'selected-language' : 'language-btn'" class="btn default-btn d-inline-flex align-items-center w-100 m-1" (click)="selectLanguage(languageCode)">
               <svg *ngIf="isSelectedLanguage(languageCode.code)" class="mx-1" xmlns="http://www.w3.org/2000/svg" height="10pt" viewBox="0 -46 417.81333 417" width="10pt"><path d="m159.988281 318.582031c-3.988281 4.011719-9.429687 6.25-15.082031 6.25s-11.09375-2.238281-15.082031-6.25l-120.449219-120.46875c-12.5-12.5-12.5-32.769531 0-45.246093l15.082031-15.085938c12.503907-12.5 32.75-12.5 45.25 0l75.199219 75.203125 203.199219-203.203125c12.503906-12.5 32.769531-12.5 45.25 0l15.082031 15.085938c12.5 12.5 12.5 32.765624 0 45.246093zm0 0"/></svg>
-              <span>{{languageCode.name}}</span>
+              <span class="text-sm">{{languageCode.name}}</span>
             </button>
           </ng-container>
         </div>
@@ -69,7 +69,7 @@
 </div>
 
 <ng-template #setDefaultSelectBtn>
-  <span class="text">Choose</span>
+  <span class="text-sm">Choose</span>
   <svg viewBox="0 0 24 24" focusable="false" class="icon-select NMm5M"><path d="M5.41 7.59L4 9l8 8 8-8-1.41-1.41L12 14.17"></path></svg>
 </ng-template>
 
